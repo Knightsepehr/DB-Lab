@@ -57,3 +57,4 @@ INSERT INTO Tables (capacity) VALUES (8);
 
 INSERT INTO `Orders`(`customer_id`, `table_id`) VALUES ('2','5');
 INSERT INTO Orders (customer_id,table_id) VALUES(2,3);
+INSERT INTO Orders (customer_id,table_id) VALUES(3,5);
