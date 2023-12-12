@@ -19,6 +19,38 @@ def create_connection():
 def close_connection(connection):
     connection.close()
 
+def create_database(connection):
+    cursor = connection.cursor()
+    query = """
+    CREATE DATABASE IF NOT EXISTS database1
+    """
+    cursor.execute(query)
+    connection.commit()
+
+def create_table(connection):
+    cursor = connection.cursor()
+    query = """
+    CREATE TABLE IF NOT EXISTS products (
+        product_id INT AUTO_INCREMENT,
+        product_name VARCHAR(255) NOT NULL,
+        category_id INT,
+        price DECIMAL(10, 2),
+        quantity INT,
+        PRIMARY KEY (product_id)
+    )
+    """
+    cursor.execute(query)
+    connection.commit()
+    query = """
+    CREATE TABLE IF NOT EXISTS categories (
+        category_id INT AUTO_INCREMENT,
+        category_name VARCHAR(255) NOT NULL,
+        PRIMARY KEY (category_id)
+    )
+    """
+    cursor.execute(query)
+    connection.commit()
+
 def add_product(product_id, product_name, category_id, price, quantity):
     connection = create_connection()
     cursor = connection.cursor()
@@ -118,3 +150,22 @@ def search_categories(category_name):
 
 def display_products():
     connection = create_connection()
+    
+    
+def test_add_category():
+    add_category(1, 'Category 1')
+    add_category(2, 'Category 2')
+    add_category(3, 'Category 3')
+    
+def test_add_product():
+    add_product(1, 'Product 1', 1, 10.50, 10)
+    add_product(2, 'Product 2', 2, 15.00, 20)
+    add_product(3, 'Product 3', 3, 20.50, 30)
+
+if __name__ == "__main__":
+    connection = create_connection()
+    create_database(connection)
+    create_table(connection)
+    test_add_product()
+    test_add_category()
+    close_connection(connection)
