@@ -37,16 +37,12 @@ def create_table(connection):
         price DECIMAL(10, 2),
         quantity INT,
         PRIMARY KEY (product_id)
-    )
-    """
-    cursor.execute(query)
-    connection.commit()
-    query = """
+    );
     CREATE TABLE IF NOT EXISTS categories (
         category_id INT AUTO_INCREMENT,
         category_name VARCHAR(255) NOT NULL,
         PRIMARY KEY (category_id)
-    )
+    );
     """
     cursor.execute(query)
     connection.commit()
